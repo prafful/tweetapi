@@ -93,7 +93,19 @@ app.post("/tweet/add", (request, response)=>{
             .catch((error)=>{
                 response.json(error)
             })
+})
 
+//get tweet by id
+app.get("/tweet/:myid", (request, response)=>{
+    console.log("get tweet by id")
+    console.log(request.params.myid)
+    tweet.findById(request.params.myid)
+            .then((data)=>{
+                response.json(data)
+            })
+            .catch((error)=>{
+                response.json(error)
+            })
 
 })
 
