@@ -106,7 +106,21 @@ app.get("/tweet/:myid", (request, response)=>{
             .catch((error)=>{
                 response.json(error)
             })
+})
 
+//delete tweet by id
+app.delete("/tweet/delete/:myid", (request, response)=>{
+    console.log("delete tweet by id")
+    console.log(request.params.myid)
+    tweet.findByIdAndDelete(request.params.myid)
+            .then((data)=>{
+                console.log(data)
+                response.json(data)
+            })
+            .catch((error)=>{
+                console.log(error)
+                response.json(error)
+            })  
 })
 
 
