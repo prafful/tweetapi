@@ -123,6 +123,34 @@ app.delete("/tweet/delete/:myid", (request, response)=>{
             })  
 })
 
+//find tweet by id and increase like
+app.put("/tweet/likes/:myid", (request, response)=>{
+    console.log("find tweet by id and increase likes")
+    console.log(request.params.myid)
+    //find the tweet by id
+    tweet.findById(request.params.myid)
+            .then((data)=>{
+                console.log(data)
+                //response.json(data)
+                //increase likes by 1
+                console.log("updating....");
+                tweet.findByIdAndUpdate(request.params.myid, {"likes": data.likes+ 1}, {new: true})
+                        .then((dataU)=>{
+                            console.log(dataU)
+                            response.json(dataU)
+                        })
+                        .catch((error)=>{
+                            response.json(error)
+                        })
+
+
+            })
+            .catch((error)=>{
+                response.json(error)
+            })
+
+})
+
 
 
 //define a port for API to run
